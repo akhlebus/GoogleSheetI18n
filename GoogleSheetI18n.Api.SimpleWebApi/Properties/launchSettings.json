@@ -1,0 +1,45 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:12080",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SPREADSHEET_ID": "156UC1_Y2mwhGfY7Y-8RDiNM75eavFwzxBFNP9emNTzc",
+        "BACKUP_FOLDER_PATH": "backups",
+        "SUBSCRIPTION_URL": "https://aktemp12345.azurewebsites.net/i18n/empty-cache"
+      }
+    },
+    "GoogleSheetI18n.Api.SimpleWebApi": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SPREADSHEET_ID": "156UC1_Y2mwhGfY7Y-8RDiNM75eavFwzxBFNP9emNTzc",
+        "BACKUP_FOLDER_PATH": "backups",
+        "SUBSCRIPTION_URL": "https://aktemp12345.azurewebsites.net/i18n/empty-cache"
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "SPREADSHEET_ID": "156UC1_Y2mwhGfY7Y-8RDiNM75eavFwzxBFNP9emNTzc",
+        "BACKUP_FOLDER_PATH": "backups",
+        "SUBSCRIPTION_URL": "https://aktemp12345.azurewebsites.net/i18n/empty-cache"
+      }
+    }
+  }
+}
