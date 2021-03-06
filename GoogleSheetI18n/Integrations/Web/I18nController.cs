@@ -44,7 +44,7 @@ namespace GoogleSheetI18n.Api.Integrations.Web
 
             _logger.LogInformation($"{nameof(ClearCache)} (Channel ID: {channelId}, Resource ID: {resourceId})");
 
-            if (_i18nCache.IsCurrentChannel(channelId, resourceId))
+            if (_i18nCache.HasNoCurrentChannel() || _i18nCache.IsCurrentChannel(channelId, resourceId))
             {
                 var deletedI18nSheets = _i18nCache.Clear();
 

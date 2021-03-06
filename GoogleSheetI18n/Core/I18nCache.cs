@@ -13,6 +13,7 @@ namespace GoogleSheetI18n.Api.Core
         public readonly string _backupsFolderPath;
         private readonly Dictionary<string, I18nSheet> _cache = new();
         private readonly Semaphore _semaphore = new(1, 1);
+        private I18nCacheMetadata _metadata;
 
         public I18nCache(string backupsFolderPath)
         {
@@ -63,6 +64,13 @@ namespace GoogleSheetI18n.Api.Core
                    currentChannel.ResourceId == sourceResourceId;
         }
 
+        public bool HasNoCurrentChannel()
+        {
+            var (_, currentChannel) = GetMetadata();
+
+            return currentChannel == null;
+        }
+
         public void AddChannel(string channelId, string resourceId, DateTimeOffset? expiration, bool isCurrent)
         {
             var metadata = GetMetadata();
@@ -92,7 +100,10 @@ namespace GoogleSheetI18n.Api.Core
             var metadataPath = Path.Combine(_backupsFolderPath, "cache-metadata");
             var metadataContent = File.Exists(metadataPath) ? File.ReadAllText(metadataPath) : string.Empty;
             var metadata = JsonConvert.DeserializeObject<I18nCacheMetadata>(metadataContent);
-            return metadata ?? new I18nCacheMetadata(new List<I18nChannel>(), null);
+            metadata ??= new I18nCacheMetadata(new List<I18nChannel>(), null);
+            _metadata = metadata;
+
+            return _metadata;
         }
 
         public void SaveMetadata(I18nCacheMetadata metadata)
@@ -100,6 +111,7 @@ namespace GoogleSheetI18n.Api.Core
             var metadataPath = Path.Combine(_backupsFolderPath, "cache-metadata");
             var metadataContent = JsonConvert.SerializeObject(metadata);
             File.WriteAllText(metadataPath, metadataContent);
+            _metadata = metadata;
         }
     }
 }

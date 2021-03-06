@@ -22,8 +22,12 @@ namespace GoogleSheetI18n.Api.Integrations.Web
 
             var i18nWebhookSubscriber = new I18nWebhookSubscriber(i18nOptions.CredentialsFilePath, i18nCache);
             i18nWebhookSubscriber.UnsubscribeFromExistingChannels().Wait();
-            i18nWebhookSubscriber.Subscribe(i18nOptions.SubscriptionUrl, i18nOptions.SpreadsheetId).Wait();
             services.AddSingleton(i18nWebhookSubscriber);
+
+            if (i18nOptions.SubscriptionUrl is not null and not "")
+            {
+                i18nWebhookSubscriber.Subscribe(i18nOptions.SubscriptionUrl, i18nOptions.SpreadsheetId).Wait();
+            }
         }
 
         private static I18nOptions AddOptions(IServiceCollection services, IConfiguration configuration, out I18nBackup i18nBackup)
