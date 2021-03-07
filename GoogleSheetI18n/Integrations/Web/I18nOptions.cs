@@ -6,7 +6,7 @@
 
         public string SpreadsheetId { get; set; }
 
-        public string BackupFolderPath { get; set; }
+        public string LocalStorePath { get; set; }
 
         public string SubscriptionUrl { get; set; }
     }

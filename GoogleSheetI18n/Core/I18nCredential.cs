@@ -16,7 +16,7 @@ namespace GoogleSheetI18n.Api.Core
         public I18nCredential(string credentialFilePath = null)
         {
             credentialFilePath = !string.IsNullOrEmpty(credentialFilePath) && !Path.IsPathRooted(credentialFilePath)
-                ? $@"{Environment.CurrentDirectory}\{credentialFilePath}"
+                ? $@"{AppDomain.CurrentDomain.BaseDirectory}\{credentialFilePath}"
                 : credentialFilePath;
 
             async Task<ICredential> CreateCredentials()

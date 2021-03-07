@@ -3,7 +3,7 @@ using GoogleSheetI18n.Api.Entities;
 using GoogleSheetI18n.Api.Features.ObjectTreeForLanguage;
 using GoogleSheetI18n.Api.Features.SupportedLanuages;
 
-namespace GoogleSheetI18n.Api
+namespace GoogleSheetI18n.Api.Core
 {
     public class I18nSheet
     {

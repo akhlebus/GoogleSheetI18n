@@ -10,22 +10,8 @@ namespace GoogleSheetI18n.Api.Core
 {
     public class I18nCache
     {
-        public readonly string _backupsFolderPath;
         private readonly Dictionary<string, I18nSheet> _cache = new();
         private readonly Semaphore _semaphore = new(1, 1);
-        private I18nCacheMetadata _metadata;
-
-        public I18nCache(string backupsFolderPath)
-        {
-            _backupsFolderPath = !string.IsNullOrEmpty(backupsFolderPath) && !Path.IsPathRooted(backupsFolderPath)
-                ? $@"{Environment.CurrentDirectory}\{backupsFolderPath}"
-                : backupsFolderPath;
-
-            if (backupsFolderPath is not null and not "")
-            {
-                Directory.CreateDirectory(_backupsFolderPath);
-            }
-        }
 
         public I18nSheet this[string key]
         {
@@ -56,35 +42,11 @@ namespace GoogleSheetI18n.Api.Core
             return i18nSheet;
         }
 
-        public bool IsCurrentChannel(string sourceChannelId, string sourceResourceId)
+        public void Set(string key, I18nSheet item)
         {
-            var (_, currentChannel) = GetMetadata();
-
-            return currentChannel.ChannelId == sourceChannelId &&
-                   currentChannel.ResourceId == sourceResourceId;
-        }
-
-        public bool HasNoCurrentChannel()
-        {
-            var (_, currentChannel) = GetMetadata();
-
-            return currentChannel == null;
-        }
-
-        public void AddChannel(string channelId, string resourceId, DateTimeOffset? expiration, bool isCurrent)
-        {
-            var metadata = GetMetadata();
-            var channel = new I18nChannel(channelId, resourceId, expiration);
-
-            if (!metadata.ExistingChannels.Any(ec => ec.ChannelId == channelId && ec.ResourceId == resourceId))
-                metadata.ExistingChannels.Add(channel);
-
-            if (isCurrent)
-            {
-                metadata = metadata with { CurrentChannel = channel };
-            }
-
-            SaveMetadata(metadata);
+            _semaphore.WaitOne();
+            this[key] = item;
+            _semaphore.Release();
         }
 
         public IList<I18nSheet> Clear()
@@ -93,25 +55,6 @@ namespace GoogleSheetI18n.Api.Core
             _cache.Clear();
 
             return removedValues;
-        }
-
-        public I18nCacheMetadata GetMetadata()
-        {
-            var metadataPath = Path.Combine(_backupsFolderPath, "cache-metadata");
-            var metadataContent = File.Exists(metadataPath) ? File.ReadAllText(metadataPath) : string.Empty;
-            var metadata = JsonConvert.DeserializeObject<I18nCacheMetadata>(metadataContent);
-            metadata ??= new I18nCacheMetadata(new List<I18nChannel>(), null);
-            _metadata = metadata;
-
-            return _metadata;
-        }
-
-        public void SaveMetadata(I18nCacheMetadata metadata)
-        {
-            var metadataPath = Path.Combine(_backupsFolderPath, "cache-metadata");
-            var metadataContent = JsonConvert.SerializeObject(metadata);
-            File.WriteAllText(metadataPath, metadataContent);
-            _metadata = metadata;
         }
     }
 }

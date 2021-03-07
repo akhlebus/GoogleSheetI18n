@@ -15,9 +15,7 @@ export function Administration() {
   const linkToGoogleSheet = `https://docs.google.com/spreadsheets/d/${i18nSettings.spreadsheetId}`;
 
   const clearCache = useCallback(() => {
-    i18nService.clearCache(
-      i18nSettings.currentChannel.channelId,
-      i18nSettings.currentChannel.resourceId,
+    i18nService.reloadLocalStore(
       authState.token
     ).then(
       (result) => {
@@ -35,7 +33,7 @@ export function Administration() {
       }
     );
     setIsLoaded(false);
-  }, [i18nSettings, authState, setIsLoaded, setError]);
+  }, [authState, setIsLoaded, setError]);
 
   if (error) {
     return <ErrorSummary message={error.message} />;
@@ -48,7 +46,7 @@ export function Administration() {
       {isLoaded && <div>
         <a href={linkToGoogleSheet} target="_blank" rel="noreferrer" className="btn btn-lg btn-success mb-3 mr-2">{t('admin-page:view-google-sheet')}</a>
         {authState.isAuthenticated && <button onClick={clearCache} className="btn btn-lg btn-outline-secondary mb-3">
-          {t('admin-page:clear-cache')}
+          {t('admin-page:reload-local-store')}
         </button>}
       </div>}
       {!isLoaded && <Loader />}

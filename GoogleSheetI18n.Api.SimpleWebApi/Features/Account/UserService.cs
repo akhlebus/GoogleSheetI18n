@@ -12,7 +12,7 @@ namespace GoogleSheetI18n.Api.SimpleWebApi.Features.Account
         {
             foreach (var cred in credentials)
             {
-                // _users.Add(cred.Key.ToLower(), (BCrypt.Net.BCrypt.Hashpassword(cred.Value), new User(cred.Key)));
+                // _users.Set(cred.Key.ToLower(), (BCrypt.Net.BCrypt.Hashpassword(cred.Value), new User(cred.Key)));
                 _users.Add(cred.Key.ToLower(),(cred.Value, new User(cred.Key)));
             }
         }
