@@ -1,5 +1,5 @@
-using GoogleSheetI18n.Api.Core;
 using GoogleSheetI18n.Api.Integrations.Web;
+using GoogleSheetI18n.Api.SimpleWebApi.Features.Account;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -30,6 +30,8 @@ namespace GoogleSheetI18n.Api.SimpleWebApi
             });
 
             services.AddGoogleSheetI18n(Configuration);
+
+            services.AddInMemoryAuthentication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +53,9 @@ namespace GoogleSheetI18n.Api.SimpleWebApi
             app.UseSpaStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

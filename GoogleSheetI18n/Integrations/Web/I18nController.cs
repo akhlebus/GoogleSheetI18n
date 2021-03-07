@@ -5,6 +5,7 @@ using GoogleSheetI18n.Api.Core;
 using GoogleSheetI18n.Api.Entities;
 using GoogleSheetI18n.Api.Exceptions;
 using GoogleSheetI18n.Api.SimpleWebApi.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -35,6 +36,7 @@ namespace GoogleSheetI18n.Api.Integrations.Web
         }
 
         [HttpPost("empty-cache")]
+        [ClaimRequirement("i18n-admin", "")]
         public async Task ClearCache()
         {
             var channelId = Request.Headers["X-Goog-Channel-ID"].ToString();

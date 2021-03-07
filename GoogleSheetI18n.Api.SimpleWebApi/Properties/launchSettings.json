@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "SPREADSHEET_ID": "156UC1_Y2mwhGfY7Y-8RDiNM75eavFwzxBFNP9emNTzc",
         "BACKUP_FOLDER_PATH": "backups",
-        "SUBSCRIPTION_URL": "https://aktemp12345.azurewebsites.net/i18n/empty-cache"
+        "SUBSCRIPTION_URL": ""
       }
     },
     "GoogleSheetI18n.Api.SimpleWebApi": {

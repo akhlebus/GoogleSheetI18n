@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { I18nSettingsContext } from '../I18nSettingsContext';
+import { useI18nSettings } from 'hooks/useI18nSettings';
 
 export function Introduction() {
   const { t } = useTranslation();
-  const i18nSettings = useContext(I18nSettingsContext);
+  const i18nSettings = useI18nSettings();
   const linkToGoogleSheet = `https://docs.google.com/spreadsheets/d/${i18nSettings.spreadsheetId}`;
 
   return (
