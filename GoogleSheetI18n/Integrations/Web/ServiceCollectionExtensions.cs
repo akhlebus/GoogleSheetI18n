@@ -3,6 +3,7 @@ using GoogleSheetI18n.Api.Core;
 using GoogleSheetI18n.Api.SimpleWebApi.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using GoogleSheetI18n.Api.Validation;
 
 namespace GoogleSheetI18n.Api.Integrations.Web
 {
@@ -22,6 +23,8 @@ namespace GoogleSheetI18n.Api.Integrations.Web
 
             var i18nGoogleClient = new I18nGoogleClient(i18nOptions.CredentialsFilePath);
             services.AddSingleton<II18nGoogleClient>(i18nGoogleClient);
+
+            services.AddSingleton<II18nCodeTranslation>(new I18nCodeTranslation());
         }
 
         private static I18nOptions AddOptions(IServiceCollection services, IConfiguration configuration)

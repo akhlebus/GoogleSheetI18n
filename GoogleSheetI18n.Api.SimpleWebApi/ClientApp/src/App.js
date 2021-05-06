@@ -18,7 +18,7 @@ export default function App() {
             <Route exact path='/' component={Home} />
             <Route path='/introduction' component={Introduction} />
             <Route path='/administration' component={Administration} />
-          </Layout>}
+          </Layout>
         </AuthProvider>
       </I18nSettingsProvider>
     </Suspense>

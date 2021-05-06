@@ -45,6 +45,11 @@ namespace GoogleSheetI18n.Api.Core
             _i18nCache.Set(cacheKey, sheet);
         }
 
+        public async Task<IList<I18nSheet>> GetSheets(string spreadsheetId)
+        {
+            return await _i18nLocalStore.GetSheets(spreadsheetId);
+        }
+
         private string GetCacheKey(string spreadsheetId, string sheetName)
         {
             return $"{spreadsheetId}.{sheetName}";

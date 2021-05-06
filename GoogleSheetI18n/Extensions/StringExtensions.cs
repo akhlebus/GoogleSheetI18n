@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace GoogleSheetI18n.Api.SimpleWebApi.Extensions
 {
@@ -17,6 +18,11 @@ namespace GoogleSheetI18n.Api.SimpleWebApi.Extensions
         public static string FromPascalCaseToUnderscoreUpperCase(this string str)
         {
             return string.Concat(str.Select((c, i) => i > 0 && char.IsUpper(c) ? "_" + c : c.ToString())).ToUpperInvariant();
+        }
+
+        public static string FromPascalCaseToDashLowerCase(this string str)
+        {
+            return string.Concat(str.Select((c, i) => i > 0 && char.IsUpper(c) ? "-" + c : c.ToString())).ToLowerInvariant();
         }
     }
 }
