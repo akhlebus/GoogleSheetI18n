@@ -17,11 +17,11 @@ namespace GoogleSheetI18n.Api.Core
                 localStoreFolderPath = "local-store";
             }
 
-            _localStoreFolderPath = !string.IsNullOrEmpty(localStoreFolderPath) && !Path.IsPathRooted(localStoreFolderPath)
+            _localStoreFolderPath = (localStoreFolderPath is not null and not "") && !Path.IsPathRooted(localStoreFolderPath)
                 ? $@"{AppDomain.CurrentDomain.BaseDirectory}\{localStoreFolderPath}"
                 : localStoreFolderPath;
 
-            if (localStoreFolderPath is not null and not "")
+            if (!string.IsNullOrEmpty(localStoreFolderPath))
             {
                 Directory.CreateDirectory(_localStoreFolderPath);
             }
@@ -63,6 +63,21 @@ namespace GoogleSheetI18n.Api.Core
         private string GetLocalStoreKey(string spreadsheetId, string sheetName)
         {
             return $"{spreadsheetId}.{sheetName}.json";
+        }
+
+        public async Task<IList<I18nSheet>> GetSheets(string spreadsheetId)
+        {
+            var sheets = new List<I18nSheet>();
+            DirectoryInfo dir = new DirectoryInfo(_localStoreFolderPath);
+            FileInfo[] filesInDir = dir.GetFiles(spreadsheetId + "*.json");
+
+            foreach (FileInfo foundFile in filesInDir)
+            {
+                var json = await File.ReadAllTextAsync(foundFile.FullName);
+                sheets.Add(JsonConvert.DeserializeObject<I18nSheet>(json));
+            }
+
+            return sheets;
         }
     }
 }

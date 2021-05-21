@@ -5,6 +5,7 @@ using GoogleSheetI18n.Api.Core;
 using GoogleSheetI18n.Api.Entities;
 using GoogleSheetI18n.Api.Exceptions;
 using GoogleSheetI18n.Api.SimpleWebApi.Extensions;
+using GoogleSheetI18n.Api.Validation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -15,23 +16,23 @@ namespace GoogleSheetI18n.Api.Integrations.Web
     public class I18nController : ControllerBase
     {
         private readonly II18nLocalStore _i18nLocalStore;
-        private readonly I18nCache _i18nCache;
         private readonly II18nGoogleClient _i18nGoogleClient;
         private readonly I18nOptions _i18nOptions;
         private readonly ILogger<I18nController> _logger;
+        private readonly II18nCodeTranslation _i18nCodeTranslation;
 
         public I18nController(
             ILogger<I18nController> logger,
             II18nGoogleClient i18nGoogleClient,
             I18nOptions i18nOptions,
-            I18nCache i18nCache,
-            II18nLocalStore i18nLocalStore)
+            II18nLocalStore i18nLocalStore,
+            II18nCodeTranslation i18nCodeTranslation)
         {
             _logger = logger;
             _i18nGoogleClient = i18nGoogleClient;
             _i18nOptions = i18nOptions;
-            _i18nCache = i18nCache;
             _i18nLocalStore = i18nLocalStore;
+            _i18nCodeTranslation = i18nCodeTranslation;
         }
 
         [HttpPost("reload-local-store")]
@@ -41,6 +42,22 @@ namespace GoogleSheetI18n.Api.Integrations.Web
             var newSheets = await _i18nGoogleClient.GetSheets(_i18nOptions.SpreadsheetId);
 
             await _i18nLocalStore.SaveSheets(newSheets);
+        }
+
+        [HttpGet("validate-spreadsheet")]
+        public async Task<object> ValidateSpreadsheet()
+        {
+            var i18nSheets = await _i18nGoogleClient.GetSheets(_i18nOptions.SpreadsheetId);
+
+            return _i18nCodeTranslation.Validate(i18nSheets);
+        }
+
+        [HttpGet("validate-local-spreadsheet")]
+        public async Task<object> ValidateLocalSpreadsheet()
+        {
+            var i18nSheets = await _i18nLocalStore.GetSheets(_i18nOptions.SpreadsheetId);
+
+            return _i18nCodeTranslation.Validate(i18nSheets);
         }
 
         [HttpGet("languages")]

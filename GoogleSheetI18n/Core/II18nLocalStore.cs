@@ -7,6 +7,6 @@ namespace GoogleSheetI18n.Api.Core
     {
         Task SaveSheets(IList<I18nSheet> sheets);
 
-    Task SaveSheet(I18nSheet sheet);
+        Task SaveSheet(I18nSheet sheet);
     }
 }
