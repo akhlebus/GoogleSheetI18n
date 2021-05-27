@@ -1,0 +1,42 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:12080",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SPREADSHEET_ID": "156UC1_Y2mwhGfY7Y-8RDiNM75eavFwzxBFNP9emNTzc",
+        "LOCAL_STORE_FOLDER_PATH": "local-store"
+      }
+    },
+    "GoogleSheetI18n.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SPREADSHEET_ID": "156UC1_Y2mwhGfY7Y-8RDiNM75eavFwzxBFNP9emNTzc",
+        "LOCAL_STORE_PATH": "local-store"
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000;http://localhost:12080"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "SPREADSHEET_ID": "156UC1_Y2mwhGfY7Y-8RDiNM75eavFwzxBFNP9emNTzc",
+        "LOCAL_STORE_PATH": "local-store"
+      }
+    }
+  }
+}
