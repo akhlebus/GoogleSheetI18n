@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 # Google API token
 token.json/
+*.env
