@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { useTranslation } from 'react-i18next';
-import FlagIcon from './FlagIcon';
-import { ENVIRONMENT } from '../environments/environment';
+import FlagIcon from 'components/FlagIcon';
+import { CONFIG } from 'environments/config';
 
 export function LanguageDetector() {
   const { i18n } = useTranslation();
@@ -10,7 +10,7 @@ export function LanguageDetector() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    window.fetch(`${ENVIRONMENT.api}/i18n/languages`)
+    window.fetch(`${CONFIG.API_URL}/i18n/languages`)
       .then(res => res.json())
       .then(
         result => setLanguages(result),

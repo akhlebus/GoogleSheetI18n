@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Loader } from './Loader';
-import { ErrorSummary } from './ErrorSummary';
+import { Loader } from 'components/Loader';
+import { ErrorSummary } from 'components/ErrorSummary';
 import { Container } from 'reactstrap';
-import { NavMenu } from './NavMenu';
-import { useI18nSettings } from '../hooks/useI18nSettings';
-import { i18nService } from '../services/i18nService';
+import { NavMenu } from 'components/NavMenu';
+import { useI18nSettings } from 'hooks/useI18nSettings';
+import { i18nService } from 'services/i18nService';
 
 export function Layout(props) {
   const [error, setError] = useState(null);

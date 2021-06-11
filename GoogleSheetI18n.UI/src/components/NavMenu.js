@@ -2,10 +2,10 @@ import React, { useState, useCallback } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import './NavMenu.css';
-import { LanguageDetector } from './LanguageDetector';
-import { useAuth } from '../hooks/useAuth';
-import { accountService } from '../services/accountService';
+import 'components/NavMenu.css';
+import { LanguageDetector } from 'components/LanguageDetector';
+import { useAuth } from 'hooks/useAuth';
+import { accountService } from 'services/accountService';
 
 
 export function NavMenu () {

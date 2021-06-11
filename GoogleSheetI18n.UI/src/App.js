@@ -1,13 +1,13 @@
 import React, { Suspense } from 'react';
 import { Route } from 'react-router';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { Introduction } from './components/Introduction';
-import { Administration } from './components/Administration';
-import I18nSettingsProvider from './hooks/useI18nSettings';
-import AuthProvider from './hooks/useAuth';
+import { Layout } from 'components/Layout';
+import { Home } from 'components/Home';
+import { Introduction } from 'components/Introduction';
+import { Administration } from 'components/Administration';
+import I18nSettingsProvider from 'hooks/useI18nSettings';
+import AuthProvider from 'hooks/useAuth';
 
-import './custom.css';
+import 'custom.css';
 
 export default function App() {
   return (

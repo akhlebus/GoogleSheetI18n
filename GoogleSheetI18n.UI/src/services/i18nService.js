@@ -1,12 +1,12 @@
-import { spreadsheetTypes } from '../enums/SpreadsheetType';
-import { ENVIRONMENT } from '../environments/environment';
+import { spreadsheetTypes } from 'enums/SpreadsheetType';
+import { CONFIG } from 'environments/config';
 
 export const i18nService = {
     getSettings: function () {
-        return window.fetch(`${ENVIRONMENT.api}/i18n/settings`);
+        return window.fetch(`${CONFIG.API_URL}/i18n/settings`);
     },
     reloadLocalStore: function (token) {
-        return window.fetch(`${ENVIRONMENT.api}/i18n/reload-local-store`,
+        return window.fetch(`${CONFIG.API_URL}/i18n/reload-local-store`,
             {
                 method: 'POST',
                 headers: {
@@ -18,6 +18,6 @@ export const i18nService = {
             });
     },
     validateSpreadsheet: function (type) {
-        return type === spreadsheetTypes.LOCAL ? window.fetch(`${ENVIRONMENT.api}/i18n/validate-local-spreadsheet`) : window.fetch(`${ENVIRONMENT.api}/i18n/validate-spreadsheet`);
+        return type === spreadsheetTypes.LOCAL ? window.fetch(`${CONFIG.API_URL}/i18n/validate-local-spreadsheet`) : window.fetch(`${CONFIG.API_URL}/i18n/validate-spreadsheet`);
     }
 }

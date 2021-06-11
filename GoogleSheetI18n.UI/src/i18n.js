@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-import { ENVIRONMENT } from './environments/environment';
+import { CONFIG } from 'environments/config';
 
 i18n
   // load translation using http -> see /public/locales
@@ -23,7 +23,7 @@ i18n
       cache: 'default'
     },
     backend: {
-      loadPath: (lngs, namespaces) => `${ENVIRONMENT.api}/i18n/${lngs.join(',')}/${namespaces.join(',')}`,
+      loadPath: (lngs, namespaces) => `${CONFIG.API_URL}/i18n/${lngs.join(',')}/${namespaces.join(',')}`,
       allowMultiLoading: false
     },
 

@@ -51,10 +51,9 @@ namespace GoogleSheetI18n.Api.SimpleWebApi
 
             app.UseRouting();
             app.UseCors(corsPolicyBuilder =>
-                corsPolicyBuilder.WithOrigins(Configuration.GetValue<string>("AppSettings:AllowedOriginUrl"))
-             .AllowAnyMethod()
-             .AllowCredentials()
-             .AllowAnyHeader());
+                corsPolicyBuilder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
 
             app.UseAuthentication();
             app.UseAuthorization();

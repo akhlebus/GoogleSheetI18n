@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useI18nSettings } from '../hooks/useI18nSettings';
+import { useI18nSettings } from 'hooks/useI18nSettings';
 
 export function Introduction() {
   const { t } = useTranslation();

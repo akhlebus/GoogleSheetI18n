@@ -1,8 +1,8 @@
-import { ENVIRONMENT } from '../environments/environment';
+import { CONFIG } from 'environments/config';
 
 export const accountService = {
   login: function() {
-    return window.fetch(`${ENVIRONMENT.api}/account/login`,
+    return window.fetch(`${CONFIG.API_URL}/account/login`,
       {
         method: 'POST',
         headers: {
@@ -16,7 +16,7 @@ export const accountService = {
       });
   },
   logout: function(token) {
-    return window.fetch(`${ENVIRONMENT.api}/account/logout`,
+    return window.fetch(`${CONFIG.API_URL}/account/logout`,
       {
         method: 'POST',
         headers: {

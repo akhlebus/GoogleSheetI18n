@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { Loader } from './Loader';
-import { ErrorSummary } from './ErrorSummary';
+import { Loader } from 'components/Loader';
+import { ErrorSummary } from 'components/ErrorSummary';
 import { useTranslation } from 'react-i18next';
-import { useI18nSettings } from '../hooks/useI18nSettings';
-import { useAuth } from '../hooks/useAuth';
-import { i18nService } from '../services/i18nService';
-import { spreadsheetTypes } from '../enums/SpreadsheetType'
+import { useI18nSettings } from 'hooks/useI18nSettings';
+import { useAuth } from 'hooks/useAuth';
+import { i18nService } from 'services/i18nService';
+import { spreadsheetTypes } from 'enums/SpreadsheetType'
 
 export function Administration() {
     const { t } = useTranslation();
