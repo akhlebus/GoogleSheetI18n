@@ -1,8 +1,0 @@
-{
-  "plugins": [
-    [
-      "i18next-extract"
-    ]
-  ],
-  "presets": [ "@babel/preset-react" ]
-}
